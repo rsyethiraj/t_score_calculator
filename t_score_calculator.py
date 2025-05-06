@@ -36,7 +36,9 @@ def split_to_watts(a: str):
     dec = 0
     if len(vals[1].split('.')) > 1:
         dec = float(vals[1].split('.')[1])*0.1
+    #Converts split into seconds/500m 
     t = (float(mins*60 + secs) + dec)/500
+    # This is the formula used by Concept2 to convert seconds/500m into watts. The '*10 //1 / 10' block truncates the answer to one decimal place. 
     return (2.8 / t**3)*10 // 1 / 10
     
 def main(args: argparse.Namespace):
