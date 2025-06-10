@@ -8,5 +8,6 @@ There are 3 main components of the python implementation:
 - app.py - Running this app in a command line with the command 'FLASK_APP=app.py flask run --port=5001' will create a web server on Localhost/5001 which can be used by both the react frontend and by another terminal window. To test the backend out, you can send it POST requests from another window using the command: ' curl -X POST http://localhost:5001/t-score \
      -H "Content-Type: application/json" \
      -d '{"weights": [your weights here], "speeds": [your speeds here]}, "names: [optionally, your names here]", 'in_lbs': (optionally True)'. Make sure to replace the fields with desired values. To run the backend, you will need to have flask and flask-cors installed, which can be done via pip or conda. 
-- react frontend implemented in the my\_app folder. It uses Vite. To run the frontend, first install node.js, then running the command 'npm run dev' will allow the frontend to be accessed from https://localhost:5173/ .
+- react frontend implemented in the simple\_frontend folder. It uses Vite. To run the frontend, first install node.js, then running the commands 'npm install' and 'npm run dev' in the simple\_frontend folder will allow the frontend to be accessed from https://localhost:5173/ .
+- A second more complex frontend with a few additional features is currently being written. 
 
