@@ -36,23 +36,31 @@ def split_to_watts(a: str):
     dec = 0
     if len(vals[1].split('.')) > 1:
         dec = float(vals[1].split('.')[1])*0.1
-    #Converts split into seconds/500m 
     t = (float(mins*60 + secs) + dec)/500
-    # This is the formula used by Concept2 to convert seconds/500m into watts. The '*10 //1 / 10' block truncates the answer to one decimal place. 
     return (2.8 / t**3)*10 // 1 / 10
-    
+
+def convert_input_to_watts(speeds):
+    for i in range(len(speeds)):
+        val = speeds[i]
+        if len(val.split(':')) > 1:
+            speeds[i] = split_to_watts(val)
+        else:
+            speeds[i] = float(speeds[i])
+    return speeds
 def main(args: argparse.Namespace):
     #convert splits to watts if necessary, convert all values to floats
-    for i in range(len(args.speeds)):
-        val = args.speeds[i]
-        if len(val.split(':')) > 1:
-            args.speeds[i] = split_to_watts(val)
-        else:
-            args.speeds[i] = float(args.speeds[i])
-    #Converts all weight to kilograms
+    speeds = convert_input_to_watts(args.speeds)
+#    for i in range(len(args.speeds)):
+#        val = args.speeds[i]
+#        if len(val.split(':')) > 1:
+#            args.speeds[i] = split_to_watts(val)
+#        else:
+#            args.speeds[i] = float(args.speeds[i])
+#    #Converts all weight to kilograms
     if args.in_lbs:
         args.weights = [float(i) / 2.2 for i in args.weights]
-    print(calculate_t_scores(args.weights, args.speeds, args.names))
+    
+    print(calculate_t_scores(args.weights, speeds, args.names))
     return 0
     
 def start_script():
@@ -65,4 +73,3 @@ def start_script():
 
 if __name__ == '__main__':
     start_script()
-

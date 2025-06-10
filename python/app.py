@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from t_score_calculator import calculate_t_scores, convert_input_to_watts
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/t-score', methods=['POST'])
 def compute_t_score():
