@@ -8,6 +8,7 @@ function App() {
   const [inLbs, setInLbs] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,8 +42,8 @@ function App() {
   };
 
   return (
-    <div className='center-container'>
-    <div className='App'>
+    <div className={`center-container ${darkMode ? 'dark': 'light'}`}>
+    <div className={'App'}>
       <h1>T-Score Calculator</h1>
       <form onSubmit={handleSubmit}>
         <div className='input-group'>
@@ -65,6 +66,14 @@ function App() {
         </div>
         <button type='submit'>Calculate</button>
       </form>
+      </div>
+      <div className='checkbox-group'>
+        <label>
+        <input type='checkbox' checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+        Toggle Dark Mode
+        </label>
+      </div>
+
 
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {result && (
@@ -77,7 +86,6 @@ function App() {
           </ul>
         </div>
       )}
-    </div>
     </div>
   );
 }
